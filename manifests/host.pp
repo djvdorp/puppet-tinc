@@ -13,7 +13,11 @@ define tinc::host(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('tinc/host.erb'),
+    content => epp('tinc/host.epp', {
+      'publicaddress'   => $publicaddress,
+      'subnets'         => $subnets,
+      'publickey'       => $publickey,
+    }),
   }
 
 }

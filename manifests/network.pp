@@ -49,7 +49,12 @@ define tinc::network(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('tinc/tinc.conf.erb'),
+    content => epp('tinc/tinc.conf.epp', {
+      'nodename'        => $nodename,
+      'addressfamily'   => $addressfamily,
+      'interface'       => $interface,
+      'connectto'       => $connectto,
+    }),
     notify  => Service['tinc'],
     require => File["/etc/tinc/${netname}"]
   }
@@ -59,7 +64,11 @@ define tinc::network(
     owner   => 'root',
     group   => 'root',
     mode    => '0544',
-    content => template('tinc/tinc-up.erb'),
+    content => epp('tinc/tinc-up.epp', {
+      'vpnaddress'      => $vpnaddress,
+      'vpnprefix'       => $vpnprefix,
+      'vpnroute'        => $vpnroute,
+    }),
     require => File["/etc/tinc/${netname}"]
   }
 
@@ -68,7 +77,7 @@ define tinc::network(
     owner   => 'root',
     group   => 'root',
     mode    => '0544',
-    content => template('tinc/tinc-down.erb'),
+    content => epp('tinc/tinc-down.epp', {}),
     require => File["/etc/tinc/${netname}"]
   }
 

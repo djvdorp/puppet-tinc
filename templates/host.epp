@@ -1,0 +1,9 @@
+<%- | String $publicaddress, Array[String] $subnets, String $publickey | -%>
+<% if $publicaddress { -%>
+Address = <%= $publicaddress %>
+<% } -%>
+<% $subnets.each |$subnet| { -%>
+Subnet = <%= $subnet %>
+<% } -%>
+
+<%= $publickey %>

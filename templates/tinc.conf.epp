@@ -1,0 +1,7 @@
+<%- | String $nodename, String $addressfamily, String $interface, Array[String] $connectto | -%>
+Name = <%= $nodename %>
+AddressFamily = <%= $addressfamily %>
+Interface = <%= $interface %>
+<% $connectto.each |$val| { -%>
+ConnectTo = <%= $val %>
+<% } -%>

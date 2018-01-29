@@ -1,0 +1,7 @@
+<%- | String $vpnaddress, String $vpnprefix, Array[String] $vpnroute | -%>
+#!/bin/sh
+ip link set $INTERFACE up
+ip addr add <%= $vpnaddress %>/<%= $vpnprefix %> dev $INTERFACE
+<% $vpnroute.each |$val| { -%>
+route add -net <%= $val %> $INTERFACE
+<% } -%>
