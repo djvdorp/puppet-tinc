@@ -81,6 +81,6 @@ define tinc::network(
     require => File["/etc/tinc/${netname}"]
   }
 
-  Tinc::Host <<| netname == $netname |>>
+  #Tinc::Host <<| netname == $netname |>>
 
 }
